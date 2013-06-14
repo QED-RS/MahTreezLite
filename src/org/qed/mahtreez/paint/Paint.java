@@ -40,15 +40,15 @@ public class Paint implements PaintListener, MessageListener {
 			normalsChopped++;
 			System.out.println("Paint: Normal trees chopped: " + normalsChopped);
 		}
-		if (svrmsg.contains("You get some oak logs.")) {
+		else if (svrmsg.contains("You get some oak logs.")) {
 			oaksChopped++;
 			System.out.println("Paint: Oaks chopped: " + oaksChopped);
 		}
-		if (svrmsg.contains("You get some willow logs.")) {
+		else if (svrmsg.contains("You get some willow logs.")) {
 			willowsChopped++;
 			System.out.println("Paint: Willows chopped: " + willowsChopped);
 		}
-		if (svrmsg.contains("You get some yew logs.")) {
+		else if (svrmsg.contains("You get some yew logs.")) {
 			yewsChopped++;
 			System.out.println("Paint: Yews chopped: " + yewsChopped);
 		}

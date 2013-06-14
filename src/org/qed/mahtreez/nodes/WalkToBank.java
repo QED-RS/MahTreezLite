@@ -10,7 +10,7 @@ public class WalkToBank extends Node {
 		
 	@Override
 	public boolean activate() {
-		return Inventory.isFull() && !MahTreez.bank.contains(Players.getLocal().getLocation());
+		return Inventory.isFull() && !MahTreez.activeTree.getBank().contains(Players.getLocal().getLocation());
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class WalkToBank extends Node {
 		System.out.println("We are walking to the bank.");
 //		System.out.println("We are walking to the bank..");
 //		System.out.println("We are walking to the bank...");
-		Walking.newTilePath(MahTreez.tilesToBank).traverse();
+		Walking.newTilePath(MahTreez.activeTree.getPathToBank()).traverse();
 	}
 
 }

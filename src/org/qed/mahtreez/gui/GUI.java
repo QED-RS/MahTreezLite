@@ -29,16 +29,18 @@ public class GUI extends JFrame {
 		String dropbank = dropOrBank.getSelectedItem().toString();
 		String chop = treeBox.getSelectedItem().toString();
 
-		if (location.equals("Edgeville")) {
+		if (location.equals("Edgeville") && chop.equals("Yew")) {
+			MahTreez.activeTree = Tree.YEW_EDGEVILLE;
 //			MahTreez.location = Tree.AREA_YEWS_EDGEVILLE;
 //			MahTreez.bank = Tree.AREA_BANK_EDGEVILLE;
 //			MahTreez.tilesToTrees = Tree.TILES_YEWS_EDGEVILLE;
 //			MahTreez.tilesToBank = Tree.TILES_BANK_EDGEVILLE;
-		} else if (location.equals("Rimmington")) {
-			MahTreez.location = Tree.AREA_YEWS_RIMMINGTON;
-			MahTreez.bank = Tree.AREA_BANK_EAST_FALADOR;
-			MahTreez.tilesToTrees = Tree.TILES_YEWS_RIMMINGTON;
-			MahTreez.tilesToBank = Tree.TILES_BANK_EAST_FALADOR;
+		} else if (location.equals("Rimmington") && chop.equals("Yew")) {
+			MahTreez.activeTree = Tree.YEW_RIMMINGTON;
+//			MahTreez.location = Tree.AREA_YEWS_RIMMINGTON;
+//			MahTreez.bank = Tree.AREA_BANK_EAST_FALADOR;
+//			MahTreez.tilesToTrees = Tree.TILES_YEWS_RIMMINGTON;
+//			MahTreez.tilesToBank = Tree.TILES_BANK_EAST_FALADOR;
 		}
 		
 		if (dropbank.equals("Bank")) {
@@ -47,10 +49,10 @@ public class GUI extends JFrame {
 			MahTreez.task = "Drop";
 		}
 
-		if (chop.equals("Yew")) {
-			MahTreez.treeToChop = Tree.YEW.getIds();
-			MahTreez.tree = Tree.YEW.getLog();
-		}
+//		if (chop.equals("Yew")) {
+//			MahTreez.treeToChop = Tree.YEW_RIMMINGTON.getIds();
+//			MahTreez.tree = Tree.YEW_RIMMINGTON.getLog();
+//		}
 //		if (chop.equals("Willow")) {
 //			MahTreez.treeToChop = Tree.WILLOW.getIds();
 //			MahTreez.tree = Tree.Willow.getLog();
@@ -63,10 +65,8 @@ public class GUI extends JFrame {
 //			MahTreez.treeToChop = Tree.NORMAL.getIds();
 //			MahTreez.tree = Tree.OAK.getLog();
 //		}
-		System.out.println("Price of your chosen log: " + MahTreez.getPrice(MahTreez.tree));
 		
 		this.dispose();
-		MahTreez.isStarted = true;
 	}
 
 	private JLabel title;
@@ -75,7 +75,8 @@ public class GUI extends JFrame {
 	private JLabel label3;
 	private JComboBox<String> locationBox;
 	private JComboBox<String> dropOrBank;
-	private JComboBox<Tree> treeBox;
+	private JComboBox<String> treeBox;
+//	private JComboBox<Tree> treeBox;
 	private JButton start;
 
 	private void initComponents() {
@@ -87,8 +88,9 @@ public class GUI extends JFrame {
 		label2 = new JLabel();
 		label3 = new JLabel();
 		locationBox = new JComboBox<String>();
-		dropOrBank = new JComboBox<>();
-		treeBox = new JComboBox<Tree>();
+		dropOrBank = new JComboBox<String>();
+		treeBox = new JComboBox<String>();
+//		treeBox = new JComboBox<Tree>();
 		start = new JButton();
 
 		title.setText("Mah Treez");
@@ -100,13 +102,15 @@ public class GUI extends JFrame {
 
 		locationBox.setModel(new DefaultComboBoxModel<>(new String[] { "Edgeville", "Rimmington" }));
 		dropOrBank.setModel(new DefaultComboBoxModel<>(new String[] { "Bank", "Drop" }));
-		treeBox.setModel(new DefaultComboBoxModel<>( Tree.values() ));
+		treeBox.setModel(new DefaultComboBoxModel<>(new String[] { "Yew" }));
+//		treeBox.setModel(new DefaultComboBoxModel<>( Tree.values() ));
 		
 		start.setText("START!");
 		start.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				startActionPerformed(e);
+				MahTreez.isStarted = true;
 			}
 		});
 

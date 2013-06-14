@@ -3,7 +3,6 @@ package org.qed.mahtreez.nodes;
 import org.qed.mahtreez.MahTreez;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
-import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.SceneEntities;
 import org.powerbot.game.api.methods.tab.Inventory;
@@ -15,13 +14,13 @@ public class Chop extends Node {
 
 	@Override
 	public boolean activate() {
-		return !Inventory.isFull() && SceneEntities.getNearest(MahTreez.treeToChop) != null;
+		return !Inventory.isFull() && SceneEntities.getNearest(MahTreez.activeTree.getIds()) != null;
 	}
 
 	@Override
 	public void execute() {
 		MahTreez.status = "Chopping";
-		SceneObject tree = SceneEntities.getNearest(MahTreez.treeToChop);
+		SceneObject tree = SceneEntities.getNearest(MahTreez.activeTree.getIds());
 
 		if (tree == null) {
 			System.out.println("Chop: cannot find the tree! Camera rotation (for next tree).");
@@ -36,24 +35,25 @@ public class Chop extends Node {
 		}
 		if (!tree.isOnScreen()) {
 			System.out.println("Chop: tree is not on screen. Camera rotation and walk towards tree.");
-			switch (Random.nextInt(1, 5)) {
-			case 1:
-				Camera.setAngle(Camera.getYaw()+Random.nextInt(-90, -70));
-				Camera.setPitch(Random.nextInt(1, 20));
-				break;
-			case 2:
-				Camera.setAngle(Camera.getYaw()+Random.nextInt(70, 90));
-				Camera.setPitch(Random.nextInt(1, 20));
-				break;
-			case 3:
-				Camera.setAngle(Camera.getYaw()+Random.nextInt(-90, -70));
-				Camera.setPitch(Random.nextInt(67, 87));
-				break;
-			case 4:
-				Camera.setAngle(Camera.getYaw()+Random.nextInt(70, 90));
-				Camera.setPitch(Random.nextInt(67, 87));
-				break;
-			}
+//			switch (Random.nextInt(1, 5)) {
+//			case 1:
+//				Camera.setAngle(Camera.getYaw()+Random.nextInt(-90, -70));
+//				Camera.setPitch(Random.nextInt(1, 20));
+//				break;
+//			case 2:
+//				Camera.setAngle(Camera.getYaw()+Random.nextInt(70, 90));
+//				Camera.setPitch(Random.nextInt(1, 20));
+//				break;
+//			case 3:
+//				Camera.setAngle(Camera.getYaw()+Random.nextInt(-90, -70));
+//				Camera.setPitch(Random.nextInt(67, 87));
+//				break;
+//			case 4:
+//				Camera.setAngle(Camera.getYaw()+Random.nextInt(70, 90));
+//				Camera.setPitch(Random.nextInt(67, 87));
+//				break;
+//			}
+			Camera.turnTo(tree);
 //			Walking.walk(tree.getLocation());
 				Task.sleep(200, 300);
 			return;
